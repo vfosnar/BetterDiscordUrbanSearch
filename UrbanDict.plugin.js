@@ -2,19 +2,19 @@
  * @name UrbanDict
  * @author vfosnar
  * @authorId
- * @version 1.0.0
+ * @version 1.0.1
  * @description Allows you to search term on Urban Dictionary
  * @website https://www.fosny.eu/
  * @source https://github.com/vfosnar/BetterDiscordUrbanSearch
  * @updateUrl https://raw.githubusercontent.com/vfosnar/BetterDiscordUrbanSearch/main/UrbanDict.plugin.js
  */
 
- module.exports = (_ => {
+module.exports = (_ => {
 	const config = {
 		"info": {
 			"name": "UrbanDict",
 			"author": "vfosnar",
-			"version": "1.0.0",
+			"version": "1.0.1",
 			"description": "Allows you to search term on Urban Dictionary"
 		}
 	};
@@ -92,6 +92,10 @@
 							action: _ => {
 								// Strip whitespaces from both sides
 								let term = selectedText.trim();
+								// Use whole message when term is empty
+								if( term == "" )
+									term = content.trim();
+								
 								// Push notification
 								BDFDB.NotificationUtils.toast( `Searching for "${ term }"`, {
 									position: "center"
